@@ -1,13 +1,8 @@
-from fastapi import FastAPI, UploadFile, File, HTTPException, Depends, Header
+from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from dotenv import load_dotenv
-import tempfile, os, shutil, sqlite3, re
-from datetime import datetime, timedelta, timezone
-
-import jwt
-import tiktoken
-from passlib.context import CryptContext
+import tempfile, os, shutil
 
 from langchain_groq import ChatGroq
 from langchain_community.document_loaders import PyPDFLoader
@@ -15,6 +10,7 @@ from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_chroma import Chroma
 from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
 
 load_dotenv()
@@ -116,7 +112,7 @@ Question: {question}
     os.unlink(tmp_path)
 
     return {
-        "message": f"PDF loaded. {len(chunks)} chunks stored in PostgreSQL. Ready to chat!"
+        "message": f"PDF loaded. {len(chunks)} chunks stored in ChromaDB. Ready to chat!"
     }
 
 
