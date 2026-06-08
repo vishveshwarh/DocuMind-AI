@@ -5,10 +5,11 @@ langchain
 langchain-core
 langchain-groq
 langchain-community
-langchain-postgres
-langchain-text-splitters
+langchain-chroma
 langchain-huggingface
-psycopg2-binary
+langchain-text-splitters
+chromadb
 pypdf
 sentence-transformers
 python-multipart
+langdetect
